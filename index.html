@@ -12,9 +12,9 @@
       --accent: #f472b6; --accent-dim: rgba(244,114,182,0.1);
       --text: #f5eef2; --muted: #9a7a8e; --input-bg: #221520;
     }
-    body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; min-height: 100vh; padding: 40px 16px 80px; }
+    body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; min-height: 100vh; padding: 40px 16px 80px; display:flex; flex-direction:column; align-items:center; }
     body::before { content:''; position:fixed; inset:0; pointer-events:none; z-index:0; background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(244,114,182,0.13) 0%, transparent 70%); }
-    .wrap { position:relative; z-index:1; max-width:580px; margin:0 auto; }
+    .wrap { position:relative; z-index:1; width:100%; max-width:580px; margin:0 auto; }
     header { text-align:center; margin-bottom:44px; animation: fadeDown 0.6s ease both; }
     .logo { font-family:'Bebas Neue',sans-serif; font-size:clamp(52px,14vw,88px); letter-spacing:5px; line-height:1; background:linear-gradient(135deg,#f472b6 0%,#fb923c 55%,#f472b6 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
     header p { color:var(--muted); font-size:12px; letter-spacing:3px; text-transform:uppercase; margin-top:10px; }
@@ -140,7 +140,6 @@
       <div class="field">
         <label>Username Telegram *</label>
         <input type="text" name="telegram" placeholder="@username" required />
-      </div>
       </div>
     </div>
 
