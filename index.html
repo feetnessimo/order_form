@@ -137,9 +137,18 @@
         <label>Nome / Nickname *</label>
         <input type="text" name="nome" placeholder="Come vuoi essere chiamato/a" required />
       </div>
-      <div class="field">
-        <label>Username Telegram *</label>
-        <input type="text" name="telegram" placeholder="@username" required />
+      <div style="background:rgba(244,114,182,0.06);border:1px solid rgba(244,114,182,0.2);border-radius:12px;padding:14px 16px;margin-bottom:4px;">
+        <div style="font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;font-weight:500;">Contatto * <span style="font-size:11px;text-transform:none;letter-spacing:0;color:var(--muted);font-style:italic;">(almeno uno)</span></div>
+        <div class="field" style="margin-bottom:10px;">
+          <label>Username Telegram</label>
+          <input type="text" id="telegram" name="telegram" placeholder="@username" oninput="validateContact()" />
+        </div>
+        <div style="text-align:center;color:var(--muted);font-size:12px;margin-bottom:10px;">oppure</div>
+        <div class="field" style="margin-bottom:0;">
+          <label>Email</label>
+          <input type="email" id="email" name="email" placeholder="tua@email.com" oninput="validateContact()" />
+        </div>
+        <div id="contactError" style="display:none;color:#f87171;font-size:12px;margin-top:8px;">⚠️ Inserisci almeno un contatto</div>
       </div>
     </div>
 
@@ -338,6 +347,12 @@
     noteEl.textContent = notes.join(' — ');
   }
 
+  function validateContact() {
+    const tg = document.getElementById('telegram').value.trim();
+    const em = document.getElementById('email').value.trim();
+    document.getElementById('contactError').style.display = (!tg && !em) ? 'block' : 'none';
+  }
+
   function selectPayment(el) {
     document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
     el.classList.add('selected');
@@ -349,6 +364,9 @@
   document.getElementById('orderForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     if (selected.size === 0) { alert('Seleziona almeno un prodotto! 🌸'); return; }
+    const tg = document.getElementById('telegram').value.trim();
+    const em = document.getElementById('email').value.trim();
+    if (!tg && !em) { document.getElementById('contactError').style.display='block'; alert('Inserisci almeno un contatto (Telegram o Email)!'); return; }
     if (!document.getElementById('pagamento_hidden').value) { alert('Seleziona un metodo di pagamento! 💳'); return; }
     const btn = document.getElementById('submitBtn');
     btn.disabled = true; btn.textContent = 'Invio in corso…';
